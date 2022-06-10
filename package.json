@@ -1,0 +1,22 @@
+{
+  "name": "jw-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "jw": "./bin/cli"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justwe7/jw-cli.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/justwe7/jw-cli/issues"
+  },
+  "homepage": "https://github.com/justwe7/jw-cli#readme"
+}
