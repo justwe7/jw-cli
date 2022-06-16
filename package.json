@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/justwe7/jw-cli/issues"
   },
-  "homepage": "https://github.com/justwe7/jw-cli#readme"
+  "homepage": "https://github.com/justwe7/jw-cli#readme",
+  "dependencies": {
+    "commander": "^9.3.0",
+    "inquirer": "^8.2.4"
+  }
 }
