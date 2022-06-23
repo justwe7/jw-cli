@@ -11,6 +11,9 @@
     "prepare": "husky install",
     "prettier": "npx prettier --write ."
   },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/justwe7/jw-cli.git"
