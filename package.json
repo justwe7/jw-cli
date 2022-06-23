@@ -21,6 +21,9 @@
   "homepage": "https://github.com/justwe7/jw-cli#readme",
   "dependencies": {
     "commander": "^9.3.0",
-    "inquirer": "^8.2.4"
+    "download-git-repo": "^3.0.2",
+    "fs-extra": "^10.1.0",
+    "inquirer": "^8.2.4",
+    "validate-npm-package-name": "^4.0.0"
   }
 }
