@@ -11,12 +11,6 @@
     "prepare": "husky install",
     "prettier": "npx prettier --write ."
   },
-  "lint-staged": {
-    "**/*.js": [
-      "npx prettier --write .",
-      "git add"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/justwe7/jw-cli.git"
@@ -32,7 +26,6 @@
     "download-git-repo": "^3.0.2",
     "fs-extra": "^10.1.0",
     "inquirer": "^8.2.4",
-    "lint-staged": "^13.0.2",
     "validate-npm-package-name": "^4.0.0"
   },
   "devDependencies": {
