@@ -12,7 +12,10 @@
     "prettier": "npx prettier --write ."
   },
   "lint-staged": {
-    "**/*": "npx prettier --write ."
+    "**/*.js": [
+      "npx prettier --write .",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
