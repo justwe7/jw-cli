@@ -7,10 +7,15 @@
     "jw": "./bin/cli"
   },
   "scripts": {
-    "test": "node ./lib",
+    "test": "ts-node ./src",
+    "build": "tsc",
     "prepare": "husky install",
     "prettier": "npx prettier --write ."
   },
+  "files": [
+    "bin",
+    "dist/**/*.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/justwe7/jw-cli.git"
@@ -29,7 +34,11 @@
     "validate-npm-package-name": "^4.0.0"
   },
   "devDependencies": {
+    "@types/node": "^18.0.0",
     "husky": "^8.0.1",
-    "prettier": "2.7.1"
+    "prettier": "2.7.1",
+    "ts-node": "^10.8.1",
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.4"
   }
 }

@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "allowJs": true, // js 文件会被 tsc 编译
+    "target": "es2015", // 编译之后的版本目录
+    "module": "commonjs", //module 用来指定要使用的模板标准 "None"， "CommonJS"， "AMD"， "System"， "UMD"， "ES6"或 "ES2015"
+    "lib": ["es6", "es2015"], // 编译中可能需要的库
+    "outDir": "dist", // 输出目录
+    "baseUrl": ".", // 与 "paths" 紧密相关
+    "typeRoots": ["node_modules/@types", "typings/*"],
+    "moduleResolution": "Node", //如何处理模块的引用，用于选择模块解析策略，有"node"和"classic"两种类型
+    "paths": {
+      // 文件映射
+      "*": ["src/*", "typings"]
+    }
+  },
+  "include": ["./src"],
+  "exclude": ["node_modules", ".vscode", "dist", "bin"]
+}
