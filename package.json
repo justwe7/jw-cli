@@ -1,5 +1,5 @@
 {
-  "name": "jw-cli",
+  "name": "jw7-cli",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,9 +8,10 @@
   },
   "scripts": {
     "test": "ts-node ./src",
+    "dev": "tsc -w",
     "build": "tsc",
     "prepare": "husky install",
-    "prettier": "npx prettier --write ."
+    "prettier": "npx prettier --write src"
   },
   "files": [
     "bin",
@@ -20,7 +21,8 @@
     "type": "git",
     "url": "git+https://github.com/justwe7/jw-cli.git"
   },
-  "author": "",
+  "author": "justwe7",
+  "email": "ilihuaxi@gmail.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/justwe7/jw-cli/issues"
