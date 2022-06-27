@@ -1,3 +1,4 @@
+export {}
 const { program } = require('commander')
 const chalk = require('chalk')
 const createProject = require('./create-project')

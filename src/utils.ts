@@ -14,7 +14,7 @@ module.exports = {
       return promise
     }
   },
-  hasGit: function hasGit() {
+  hasGit: function () {
     if (hasGit) return true
 
     try {

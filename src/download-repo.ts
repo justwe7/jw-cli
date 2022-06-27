@@ -1,3 +1,4 @@
+export {}
 const path = require('path')
 const os = require('os')
 const downloadGit = require('download-git-repo')
