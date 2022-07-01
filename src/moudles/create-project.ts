@@ -1,15 +1,12 @@
-export {}
-const path = require('path')
-const fs = require('fs')
-const fse = require('fs-extra')
-const exec = require('child_process').exec
-const execSync = require('child_process').execSync
-const inquirer = require('inquirer')
-const validateProjectName = require('validate-npm-package-name')
-const chalk = require('chalk')
-const ora = require('ora')
-
-const fetchRemoteRepoTemp = require('./download-repo')
+import * as path from 'path'
+import * as fs from 'fs'
+import * as fse from 'fs-extra'
+import * as inquirer from 'inquirer'
+import { exec, execSync } from 'child_process'
+import * as validateProjectName from 'validate-npm-package-name'
+import * as ora from 'ora'
+import * as chalk from 'chalk'
+import fetchRemoteRepoTemp from '../lib/download-repo'
 
 const question = [
   {
@@ -47,7 +44,7 @@ const question = [
   // },
 ]
 
-module.exports = function () {
+export default function () {
   const cwd = process.cwd()
   let timoutTimer = null
 
@@ -122,7 +119,7 @@ module.exports = function () {
     // 真正的目录地址
     const targetDir = path.resolve(cwd, realProjectName)
     try {
-      fse.copySync(tmpDir, targetDir, {
+      fse.copySync(tmpDir as string, targetDir, {
         overwrite: true,
       })
       setPackageJson({ projectName: realProjectName, version: answer.version })

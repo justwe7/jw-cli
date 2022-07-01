@@ -1,10 +1,10 @@
-module.exports = function (string) {
-  function RotateLeft(lValue, iShiftBits) {
+export default function (string: string) {
+  function RotateLeft(lValue: number, iShiftBits: number) {
     return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits))
   }
 
-  function AddUnsigned(lX, lY) {
-    var lX4, lY4, lX8, lY8, lResult
+  function AddUnsigned(lX: number, lY: number) {
+    var lX4: number, lY4: number, lX8: number, lY8: number, lResult: number
     lX8 = lX & 0x80000000
     lY8 = lY & 0x80000000
     lX4 = lX & 0x40000000
@@ -24,41 +24,73 @@ module.exports = function (string) {
     }
   }
 
-  function F(x, y, z) {
+  function F(x: number, y: number, z: number) {
     return (x & y) | (~x & z)
   }
-  function G(x, y, z) {
+  function G(x: number, y: number, z: number) {
     return (x & z) | (y & ~z)
   }
-  function H(x, y, z) {
+  function H(x: number, y: number, z: number) {
     return x ^ y ^ z
   }
-  function I(x, y, z) {
+  function I(x: number, y: number, z: number) {
     return y ^ (x | ~z)
   }
 
-  function FF(a, b, c, d, x, s, ac) {
+  function FF(
+    a: number,
+    b: any,
+    c: any,
+    d: any,
+    x: any,
+    s: number,
+    ac: number,
+  ) {
     a = AddUnsigned(a, AddUnsigned(AddUnsigned(F(b, c, d), x), ac))
     return AddUnsigned(RotateLeft(a, s), b)
   }
 
-  function GG(a, b, c, d, x, s, ac) {
+  function GG(
+    a: number,
+    b: any,
+    c: any,
+    d: any,
+    x: any,
+    s: number,
+    ac: number,
+  ) {
     a = AddUnsigned(a, AddUnsigned(AddUnsigned(G(b, c, d), x), ac))
     return AddUnsigned(RotateLeft(a, s), b)
   }
 
-  function HH(a, b, c, d, x, s, ac) {
+  function HH(
+    a: number,
+    b: any,
+    c: any,
+    d: any,
+    x: any,
+    s: number,
+    ac: number,
+  ) {
     a = AddUnsigned(a, AddUnsigned(AddUnsigned(H(b, c, d), x), ac))
     return AddUnsigned(RotateLeft(a, s), b)
   }
 
-  function II(a, b, c, d, x, s, ac) {
+  function II(
+    a: number,
+    b: any,
+    c: any,
+    d: any,
+    x: any,
+    s: number,
+    ac: number,
+  ) {
     a = AddUnsigned(a, AddUnsigned(AddUnsigned(I(b, c, d), x), ac))
     return AddUnsigned(RotateLeft(a, s), b)
   }
 
-  function ConvertToWordArray(string) {
-    var lWordCount
+  function ConvertToWordArray(string: string) {
+    var lWordCount: number
     var lMessageLength = string.length
     var lNumberOfWords_temp1 = lMessageLength + 8
     var lNumberOfWords_temp2 =
@@ -83,11 +115,11 @@ module.exports = function (string) {
     return lWordArray
   }
 
-  function WordToHex(lValue) {
+  function WordToHex(lValue: number) {
     var WordToHexValue = '',
       WordToHexValue_temp = '',
-      lByte,
-      lCount
+      lByte: number,
+      lCount: number
     for (lCount = 0; lCount <= 3; lCount++) {
       lByte = (lValue >>> (lCount * 8)) & 255
       WordToHexValue_temp = '0' + lByte.toString(16)
@@ -98,7 +130,7 @@ module.exports = function (string) {
     return WordToHexValue
   }
 
-  function Utf8Encode(string) {
+  function Utf8Encode(string: string) {
     string = string.replace(/\r\n/g, '\n')
     var utftext = ''
 
@@ -121,7 +153,15 @@ module.exports = function (string) {
   }
 
   var x = Array()
-  var k, AA, BB, CC, DD, a, b, c, d
+  var k: number,
+    AA: any,
+    BB: any,
+    CC: any,
+    DD: any,
+    a: number,
+    b: number,
+    c: number,
+    d: number
   var S11 = 7,
     S12 = 12,
     S13 = 17,

@@ -1,9 +1,8 @@
-export {}
-const https = require('https')
-const { unescape, escape } = require('querystring')
-const ora = require('ora')
-const chalk = require('chalk')
-const MD5 = require('./md5')
+import { unescape, escape } from 'querystring'
+import * as https from 'https'
+import * as ora from 'ora'
+import * as chalk from 'chalk'
+import MD5 from '../lib/md5'
 
 const appid = '20220617001250356'
 const key = 'HJXcVnFUYsUk1PvTDzBK'
@@ -78,7 +77,7 @@ function translate({ wd, from = 'auto', to = 'zh' }) {
   })
 }
 
-module.exports = translate
+export default translate
 
 /* translate({ wd: '橙子', to: 'en' }).then(res => {
   console.log(1, res)

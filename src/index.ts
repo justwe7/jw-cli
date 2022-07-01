@@ -1,18 +1,13 @@
-export {}
-const { program } = require('commander')
-const chalk = require('chalk')
-const createProject = require('./create-project')
-const log = console.log
-const ora = require('ora')
-const exec = require('child_process').exec
-const translate = require('./translate')
-const gitFlow = require('./git-flow')
+// require('module-alias/register')
+import { program } from 'commander'
+import createProject from './moudles/create-project'
+import translate from './moudles/translate'
+import gitFlow from './moudles/git-flow'
 // const cliSpinners = require('cli-spinners');
 
 // program
 //   .option('--first, --xx <char>')
 //   .option('-s, --separator <char>');
-
 program
   .command('create')
   .description('create a new project from a template')

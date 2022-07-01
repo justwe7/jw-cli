@@ -1,12 +1,11 @@
-export {}
-const util = require('util')
-const exec = util.promisify(require('child_process').exec)
-const execSync = require('child_process').execSync
-const ora = require('ora')
-const chalk = require('chalk')
-const { formatDate, hasGit } = require('./utils')
+import * as util from 'util'
+import { execSync, exec as rexec } from 'child_process'
+const exec = util.promisify(rexec)
+import * as ora from 'ora'
+import * as chalk from 'chalk'
+import { formatDate, hasGit } from '../lib/utils'
 
-module.exports = async function ({ name, separator }) {
+export default async function ({ name, separator }) {
   const spinner = ora({
     spinner: 'dots12',
   }).start()
@@ -30,7 +29,7 @@ module.exports = async function ({ name, separator }) {
 
   const branchName =
     separator +
-    [userName, name, formatDate(new Date(), 'YYYYMMDD')].join(separator)
+    [name, userName, formatDate(new Date(), 'YYYYMMDD')].join(separator)
   const DevBarnch = 'dev' + branchName
   const TestBarnch = 'test' + branchName
   // console.log(DevBarnch)
