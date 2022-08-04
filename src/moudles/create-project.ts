@@ -7,6 +7,7 @@ import * as validateProjectName from 'validate-npm-package-name'
 import * as ora from 'ora'
 import * as chalk from 'chalk'
 import fetchRemoteRepoTemp from '../lib/download-repo'
+import installNodeModules from '../lib/install-node-modules'
 
 const question = [
   {
@@ -19,7 +20,7 @@ const question = [
       },
       {
         name: 'uni-app',
-        value: 'wxAppCanvasText',
+        value: '@uni-app', // 以@开头，为https://github.com/justwe7/jw-cli-templates仓库的一级子目录
       },
     ],
     default: 'SSR(vue2)',
@@ -35,6 +36,13 @@ const question = [
     message: 'version',
     name: 'version',
     default: '1.0.0',
+  },
+  {
+    type: 'list',
+    name: 'package',
+    message: 'select the package management',
+    choices: ['npm', 'yarn'],
+    default: 'npm',
   },
   // {
   //   type: 'input',
@@ -113,7 +121,13 @@ export default function () {
     }, 2000)
 
     // 缓存在内存中的项目文件
-    const tmpDir = await fetchRemoteRepoTemp('justwe7/' + answer.templateName)
+    const repoUri =
+      (/^@/.test(answer.templateName) && 'justwe7/jw-cli-templates') || '' // 以@开头的为https://github.com/justwe7/jw-cli-templates的子目录
+    const folderName = (repoUri && `/${answer.templateName.substr(1)}`) || ''
+    const tmpDir = await fetchRemoteRepoTemp(
+      repoUri || 'justwe7/' + answer.templateName,
+      folderName,
+    )
     clearTimeout(timoutTimer)
 
     // 真正的目录地址
@@ -123,7 +137,22 @@ export default function () {
         overwrite: true,
       })
       setPackageJson({ projectName: realProjectName, version: answer.version })
+      // spinner.text = '模板下载完成，正在安装依赖...'
+      // spinner.color = 'cyan'
+      spinner.stop()
+      // 安装依赖
+      await installNodeModules({
+        cwd: path.join(process.cwd(), realProjectName),
+        package: answer.package,
+      })
+
+      console.log()
       spinner.succeed(chalk.greenBright('🚀 模板下载完成~'))
+      console.log()
+      console.log('We suggest that you begin by typing:')
+      console.log()
+      console.log(chalk.cyan('  cd'), realProjectName)
+      console.log(`  ${chalk.cyan(`${answer.package} run dev`)}`)
       // execSync(`cd ${realProjectName}`)
       // console.log(chalk.cyanBright(`已跳转至${realProjectName}目录`))
     } catch (error) {

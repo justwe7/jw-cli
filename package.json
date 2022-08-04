@@ -28,7 +28,9 @@
     "url": "https://github.com/justwe7/jw-cli/issues"
   },
   "homepage": "https://github.com/justwe7/jw-cli#readme",
-  "_moduleDirectories": ["src/lib"],
+  "_moduleDirectories": [
+    "src/lib"
+  ],
   "_moduleAliases": {
     "lib": "src/lib"
   },
@@ -47,6 +49,7 @@
     "@types/node": "^18.0.0",
     "@types/ora": "^3.2.0",
     "@types/validate-npm-package-name": "^4.0.0",
+    "cross-spawn": "^7.0.3",
     "husky": "^8.0.1",
     "prettier": "2.7.1",
     "ts-node": "^10.8.1",
