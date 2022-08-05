@@ -1,18 +1,13 @@
-const { program } = require('commander');
-const chalk = require('chalk')
-const createProject = require('./create-project');
-const log = console.log;
-const ora = require('ora');
-const exec = require('child_process').exec;
-const translate = require('./translate');
-const gitFlow = require('./git-flow');
+// require('module-alias/register')
+import { program } from 'commander'
+import createProject from './moudles/create-project'
+import translate from './moudles/translate'
+import gitFlow from './moudles/git-flow'
 // const cliSpinners = require('cli-spinners');
-
 
 // program
 //   .option('--first, --xx <char>')
 //   .option('-s, --separator <char>');
-
 program
   .command('create')
   .description('create a new project from a template')
@@ -21,20 +16,22 @@ program
     // 输入参数校验
     // console.log(program.opts(), cmd)
     createProject()
-  });
+  })
 
 // jw gflow
 program
   .option('-s, --separator <char>', '<jw glow>separator character', '_')
   .command('gflow <name>')
-  .description('create a git flow process, the branch rule is dev_userName_demandName_YYYYMMDD')
+  .description(
+    'create a git flow process, the branch rule is dev_userName_demandName_YYYYMMDD',
+  )
   .action((name, cmd) => {
     gitFlow({
       name,
-      separator: program.opts().separator
+      separator: program.opts().separator,
     })
     // console.log(program.opts())
-  });
+  })
 
 // jw zy
 program
@@ -44,7 +41,7 @@ program
   .action((str, cmd) => {
     const wd = str.join(' ')
     // console.log(str)
-    translate({ wd, from: 'zh', to: 'en' })/* .then(res => {
+    translate({ wd, from: 'zh', to: 'en' }) /* .then(res => {
       // spinner.succeed(chalk.redBright(wd) + ' ↪️ ' + chalk.cyanBright(res))
       spinner.stopAndPersist({
         // prefixText: '🦄',
@@ -53,7 +50,7 @@ program
     }) */
     // 输入参数校验
     // console.log(program.opts())
-  });
+  })
 
 // jw yz
 program
@@ -64,11 +61,11 @@ program
     /* const spinner = ora({
       spinner: 'circleHalves'
     }).start() */
-    translate({ wd, to: 'zh' })/* .then(res => {
+    translate({ wd, to: 'zh' }) /* .then(res => {
       spinner.stopAndPersist({
         text: chalk.redBright(wd) + ' ↪️ ' + chalk.cyanBright(res)
       })
     }) */
-  });
+  })
 
-program.parse();
+program.parse()
