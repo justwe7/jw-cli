@@ -8,6 +8,7 @@ import * as ora from 'ora'
 import * as chalk from 'chalk'
 import fetchRemoteRepoTemp from '../lib/download-repo'
 import installNodeModules from '../lib/install-node-modules'
+import gitInit from '../lib/git-init'
 
 const question = [
   {
@@ -36,6 +37,11 @@ const question = [
     message: 'version',
     name: 'version',
     default: '1.0.0',
+  },
+  {
+    type: 'confirm',
+    name: 'useGit',
+    message: 'use git as version control?',
   },
   {
     type: 'list',
@@ -117,8 +123,8 @@ export default function () {
       timoutTimer = setTimeout(() => {
         spinner.text = '马上就好...'
         spinner.color = 'red'
-      }, 4000)
-    }, 2000)
+      }, 6000)
+    }, 3000)
 
     // 缓存在内存中的项目文件
     const repoUri =
@@ -145,6 +151,10 @@ export default function () {
         cwd: path.join(process.cwd(), realProjectName),
         package: answer.package,
       })
+
+      if (answer.useGit) {
+        gitInit({ cwd: path.join(process.cwd(), realProjectName) })
+      }
 
       console.log()
       spinner.succeed(chalk.greenBright('🚀 模板下载完成~'))
