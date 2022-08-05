@@ -30,5 +30,4 @@ jobs:
         run: npm publish
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        with:
-          default_branch: "main"
+
