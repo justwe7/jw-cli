@@ -28,10 +28,9 @@ jobs:
       - name: "Publish to the npm registry"
         # uses: primer/publish@3.0.0
         run: |
-          git config user.name justwe7
+          # git config user.name justwe7
           echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" >> ~/.npmrc
           echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" >> .npmrc
-          # echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
           npm publish --access public
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

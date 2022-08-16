@@ -20,7 +20,7 @@ program
 
 // jw gflow
 program
-  .option('-s, --separator <char>', '<jw glow>separator character', '_')
+  .option('-s, --separator <char>', '<jw glow>separator character', '/')
   .command('gflow <name>')
   .description(
     'create a git flow process, the branch rule is dev_userName_demandName_YYYYMMDD',
@@ -40,16 +40,7 @@ program
   // .option('-l, --letter [letters...]', 'specify letters')
   .action((str, cmd) => {
     const wd = str.join(' ')
-    // console.log(str)
-    translate({ wd, from: 'zh', to: 'en' }) /* .then(res => {
-      // spinner.succeed(chalk.redBright(wd) + ' ↪️ ' + chalk.cyanBright(res))
-      spinner.stopAndPersist({
-        // prefixText: '🦄',
-        text: chalk.redBright(wd) + ' ↪️ ' + chalk.cyanBright(res)
-      })
-    }) */
-    // 输入参数校验
-    // console.log(program.opts())
+    translate({ wd, from: 'zh', to: 'en' })
   })
 
 // jw yz
@@ -58,14 +49,7 @@ program
   .description('英译中')
   .action((str, cmd) => {
     const wd = str.join(' ')
-    /* const spinner = ora({
-      spinner: 'circleHalves'
-    }).start() */
-    translate({ wd, to: 'zh' }) /* .then(res => {
-      spinner.stopAndPersist({
-        text: chalk.redBright(wd) + ' ↪️ ' + chalk.cyanBright(res)
-      })
-    }) */
+    translate({ wd, to: 'zh' })
   })
 
 program.parse()

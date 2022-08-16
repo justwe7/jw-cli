@@ -1,11 +1,7 @@
-import { unescape, escape } from 'querystring'
 import * as https from 'https'
 import * as ora from 'ora'
 import * as chalk from 'chalk'
-import MD5 from '../lib/md5'
 
-const appid = '20220617001250356'
-const key = 'HJXcVnFUYsUk1PvTDzBK'
 const query = 'apple'
 // 多个query可以用\n连接  如 query='apple\norange\nbanana\npear'
 
@@ -18,20 +14,31 @@ const query = 'apple'
 //   sign: sign
 // })
 
-function translate({ wd, from = 'auto', to = 'zh' }) {
-  const salt = +new Date()
-  const sign = MD5(appid + wd + salt + key)
+function translate(params: { wd: string; from?: string; to?: string }) {
+  const queryStringArr = []
+  for (const [key, val] of Object.entries(params)) {
+    queryStringArr.push(`${key}=${val}`)
+  }
+  // const salt = +new Date()
+  // const sign = MD5(appid + wd + salt + key)
   const options = {
-    hostname: 'fanyi-api.baidu.com',
+    hostname: 'api-puce-rho.vercel.app',
     // hostname: 'https://fanyi-api.baidu.com',
     port: 443,
-    path:
-      '/api/trans/vip/translate?' +
-      `q=${escape(
-        wd,
-      )}&appid=${appid}&salt=${salt}&from=${from}&to=${to}&sign=${sign}`,
+    path: encodeURI('/api/translate?' + queryStringArr.join('&')),
     method: 'GET',
   }
+  // const options = {
+  //   hostname: 'fanyi-api.baidu.com',
+  //   // hostname: 'https://fanyi-api.baidu.com',
+  //   port: 443,
+  //   path:
+  //     '/api/trans/vip/translate?' +
+  //     `q=${escape(
+  //       wd,
+  //     )}&appid=${appid}&salt=${salt}&from=${from}&to=${to}&sign=${sign}`,
+  //   method: 'GET',
+  // }
 
   return new Promise((resolve, reject) => {
     const spinner = ora({
@@ -41,36 +48,28 @@ function translate({ wd, from = 'auto', to = 'zh' }) {
       res.on('data', (d) => {
         const result = JSON.parse(d.toString())
         // console.log(result)
-        if (result.error_code) {
-          reject(result.error_msg)
-          spinner.fail(result.error_msg)
+        if (result.code !== 200) {
+          reject(result.data)
+          spinner.fail(result.data)
           return
         }
-        const resultStr = result.trans_result.slice(1).reduce((str, target) => {
+        const ret = result.data
+        const resultStr = ret.trans_result.slice(1).reduce((str, target) => {
           str += '-' + target.dst
           return str
-        }, result.trans_result[0].dst)
+        }, ret.trans_result[0].dst)
         resolve(resultStr)
         spinner.stopAndPersist({
           // prefixText: '🦄',
-          text: chalk.redBright(wd) + ' ↪️ ' + chalk.cyanBright(resultStr),
+          text:
+            chalk.redBright(params.wd) + ' ↪️ ' + chalk.cyanBright(resultStr),
         })
-
-        // resolve({
-        //   from: result.from,
-        //   to: result.to,
-        //   trans_result: result.trans_result.map(item => {
-        //     return {
-        //       src: item.src,
-        //       dst: decodeURIComponent(item.dst)
-        //     }
-        //   })
-        // })
       })
     })
 
     req.on('error', (error) => {
       console.error(error)
+      reject(error)
     })
 
     req.end()
