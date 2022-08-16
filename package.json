@@ -1,6 +1,6 @@
 {
   "name": "@justwe7/cli",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -34,8 +34,12 @@
   "_moduleAliases": {
     "lib": "src/lib"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "dependencies": {
     "commander": "^9.3.0",
+    "cross-spawn": "^7.0.3",
     "download-git-repo": "^3.0.2",
     "fs-extra": "^10.1.0",
     "inquirer": "^8.2.4",
@@ -49,7 +53,6 @@
     "@types/node": "^18.0.0",
     "@types/ora": "^3.2.0",
     "@types/validate-npm-package-name": "^4.0.0",
-    "cross-spawn": "^7.0.3",
     "husky": "^8.0.1",
     "prettier": "2.7.1",
     "ts-node": "^10.8.1",
