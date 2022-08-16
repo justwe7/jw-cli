@@ -21,9 +21,6 @@
     "type": "git",
     "url": "git+https://github.com/justwe7/jw-cli.git"
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
   "author": "justwe7",
   "email": "ilihuaxi@gmail.com",
   "license": "MIT",
