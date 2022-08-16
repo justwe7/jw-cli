@@ -34,6 +34,9 @@
   "_moduleAliases": {
     "lib": "src/lib"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "dependencies": {
     "commander": "^9.3.0",
     "cross-spawn": "^7.0.3",
