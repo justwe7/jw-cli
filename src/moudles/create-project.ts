@@ -16,15 +16,23 @@ const question = [
     type: 'list',
     choices: [
       {
-        name: 'SSR(vue2)',
-        value: 'Vue-SSR', // 对应GitHub仓库名（TODO: 整理template仓库
+        name: 'Vue3',
+        value: 'Vue-SSR#vue3', // 对应GitHub仓库名 #vue3 指定分支名
+      },
+      {
+        name: 'Vue2-SSR',
+        value: 'Vue-SSR',
+      },
+      {
+        name: 'Vue2',
+        value: 'Vue-SSR#vue2',
       },
       {
         name: 'uni-app',
         value: '@uni-app', // 以@开头，为https://github.com/justwe7/jw-cli-templates仓库的一级子目录
       },
     ],
-    default: 'SSR(vue2)',
+    default: 'Vue2-SSR',
   },
   {
     name: 'projectName',
@@ -47,7 +55,7 @@ const question = [
     type: 'list',
     name: 'package',
     message: 'select the package management',
-    choices: ['npm', 'yarn'],
+    choices: ['npm', 'yarn', 'none'],
     default: 'npm',
   },
   // {
@@ -147,10 +155,12 @@ export default function () {
       // spinner.color = 'cyan'
       spinner.stop()
       // 安装依赖
-      await installNodeModules({
-        cwd: path.join(process.cwd(), realProjectName),
-        package: answer.package,
-      })
+      if (answer.package !== 'none') {
+        await installNodeModules({
+          cwd: path.join(process.cwd(), realProjectName),
+          package: answer.package,
+        })
+      }
 
       if (answer.useGit) {
         gitInit({ cwd: path.join(process.cwd(), realProjectName) })
